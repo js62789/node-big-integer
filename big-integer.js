@@ -28,7 +28,7 @@ module.exports = {
   add: function () {
     var numbers = objToArray(arguments),
       numNumbers = numbers.length,
-      result = 0;
+      result = "";
 
     while (numNumbers--) {
       result = this._addTwoNumbers(result, numbers[numNumbers]);
@@ -59,7 +59,7 @@ module.exports = {
       remainder = (sum > 9) ? 1 : 0;
       result = (sum % 10).toString() + result;
 
-      if(curDigit == 0) result = remainder.toString() + result;
+      if(curDigit === 0) result = remainder.toString() + result;
     }
 
     return trim(result);
@@ -95,8 +95,45 @@ module.exports = {
         return operand1;
       } else if (operand2Digit > operand1Digit) {
         return operand2;
-      } else {
-        continue;
+      } else if ((i === (maxDigits - 1)) && (operand1Digit === operand2Digit)){
+        return operand2;
+      }
+    }
+  },
+
+  min: function () {
+    var numbers =  objToArray (arguments),
+      numNumbers = numbers.length,
+      smallest = numbers[0];
+
+    for(var i = 0; i < numNumbers; i++) {
+      var number = numbers[i],
+        smallest = this._minTwoNumbers(smallest, number);
+        console.log(smallest, number);
+    }
+
+    return smallest;
+  },
+
+  _minTwoNumbers: function (operand1, operand2) {
+    var operand1 = operand1.toString(),
+      operand2 = operand2.toString(),
+      maxDigits = Math.max(operand1.length, operand2.length),
+      operand1 = normalize(operand1, maxDigits),
+      operand2 = normalize(operand2, maxDigits)
+      operand1Digits = operand1.split(""),
+      operand2Digits = operand2.split("");
+
+    for(var i = 0; i < maxDigits; i++) {
+      var operand1Digit = parseInt(operand1Digits[i], 10),
+        operand2Digit = parseInt(operand2Digits[i], 10);
+
+      if (operand1Digit < operand2Digit) {
+        return operand1;
+      } else if (operand2Digit < operand1Digit) {
+        return operand2;
+      } else if ((i === maxDigits - 1) && (operand1Digit === operand2Digit)) {
+        return operand1;
       }
     }
   },

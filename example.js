@@ -12,4 +12,6 @@ console.log('Multiply Many', bigint.multiply("11", "11", "11"));
 
 console.log('Max', bigint.max("1000", "900", "1234", "9999"));
 
+console.log('Min', bigint.min("1000", "900", "1234", "9999"));
+
 console.log('Power', bigint.pow("11", "11"));
