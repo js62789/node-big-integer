@@ -58,6 +58,8 @@ module.exports = {
 
       remainder = (sum > 9) ? 1 : 0;
       result = (sum % 10).toString() + result;
+
+      if(curDigit == 0) result = remainder.toString() + result;
     }
 
     return trim(result);
