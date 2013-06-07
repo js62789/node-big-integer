@@ -109,7 +109,6 @@ module.exports = {
     for(var i = 0; i < numNumbers; i++) {
       var number = numbers[i],
         smallest = this._minTwoNumbers(smallest, number);
-        console.log(smallest, number);
     }
 
     return smallest;
@@ -163,17 +162,19 @@ module.exports = {
   multiply: function () {
     var numbers = objToArray (arguments),
       numNumbers = numbers.length,
-      result;
+      result = numbers[0];
 
-    for (var i = 0; i < numNumbers; i++) {
+    for (var i = 1; i < numNumbers; i++) {
       var number = numbers[i],
-        result = (result) ? this._multiplyTwoNumbers(result, number) : number;
+        result = this._multiplyTwoNumbers(result, number);
     }
 
     return result;
   },
 
   _multiplyTwoNumbers: function (operand1, operand2) {
+    if(parseInt(operand1, 10) === 0 || parseInt(operand2, 10) === 0) return 0;
+
     var operand1 = operand1.toString(),
       operand2 = operand2.toString(),
       maxDigits = Math.max(operand1.length, operand2.length),
